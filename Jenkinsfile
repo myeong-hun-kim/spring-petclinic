@@ -37,7 +37,7 @@ pipeline {
       steps{
         sh """
         echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-        docker push myeonghunkim/spring-peclinic:latest
+        docker push myeonghunkim/spring-petclinic:latest
         """
       }
     }
