@@ -41,8 +41,36 @@ pipeline {
         """
       }
     }
-    //stage('SSH Publish') {
-      
-    //}
+    stage ('Remove Docker Image') {
+      steps {
+        sh """
+        docker rmi myeonghunkim/spring-petclinic:$BUILD_NUMBER
+        docker rmi myeonghunkim/spring-petclinic:latest
+        """
+      }
+    }
+    stage('Docker container') {
+      steps {
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'target',
+        transfers: [sshTransfer(cleanRemote: false,
+        excludes: '''
+        docker rm -f $(docker ps -aq)
+        docker rmi $(docker images -q)
+        docker run -d -p 80:8080 --name spring-petclinic myeonghunkim/spring-petclinic:latest
+        ''',
+        execCommand: '',
+        execTimeout: 120000,
+        flatten: false,
+        makeEmptyDirs: false,
+        noDefaultExcludes: false,
+        patternSeparator: '[, ]+',
+        remoteDirectory: '',
+        remoteDirectorySDF: false,
+        removePrefix: '', sourceFiles: '')],
+        usePromotionTimestamp: false,
+        useWorkspaceInPromotion: false,
+        verbose: false)])
+      }
+    }
   }
 }
