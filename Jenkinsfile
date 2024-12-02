@@ -13,9 +13,11 @@ pipeline {
         git url: 'https://github.com/myeong-hun-kim/spring-petclinic.git', branch: 'main'
       }
     }
-    //stage('Maven Build') {
-      
-    //}
+    stage('Maven Build') {
+      steps {
+        sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+      }
+    }
     //stage('Docker Image') {
       
     //}
