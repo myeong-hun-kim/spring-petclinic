@@ -52,13 +52,12 @@ pipeline {
     stage('Docker container') {
       steps {
         sshPublisher(publishers: [sshPublisherDesc(configName: 'target',
-        transfers: [sshTransfer(cleanRemote: false,
-        excludes: '''
+        transfers: [sshTransfer(cleanRemote: false, excludes: '',
+        execCommand: '''
         docker rm -f $(docker ps -aq)
         docker rmi $(docker images -q)
         docker run -d -p 80:8080 --name spring-petclinic myeonghunkim/spring-petclinic:latest
         ''',
-        execCommand: '',
         execTimeout: 120000,
         flatten: false,
         makeEmptyDirs: false,
