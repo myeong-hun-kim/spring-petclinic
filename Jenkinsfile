@@ -35,7 +35,7 @@ pipeline {
     // Docker Image 생성
     stage('Docker Image Build') {
       steps {
-        echo 'Docker Image Build'
+        echo 'Docker Image build'
         dir("${env.WORKSPACE}") {
           sh """
           docker build -t myeonghunkim/spring-petclinic:$BUILD_NUMBER .
