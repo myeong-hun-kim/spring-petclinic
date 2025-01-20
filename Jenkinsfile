@@ -52,6 +52,16 @@ pipeline {
         }
       }
 
+    // Docker Image 삭제
+      stage('Remove Docker Image') {
+        steps {
+          sh """
+          docker rmi myeonghunkim/spring-petclinic:$BUILD_NUMBER
+          docker rmi myeonghunkim/spring-petclinic:latest
+          """
+        }
+      }
+
       
   }
 }
