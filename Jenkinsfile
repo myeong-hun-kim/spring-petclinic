@@ -22,7 +22,7 @@ pipeline {
           branch: 'main'
       }
     }
-  }
+  
     
     // Maven 빌드 작업
     stage('Maven Build') {
@@ -30,6 +30,7 @@ pipeline {
         echo 'Maven Build'
         sh 'mvn -Dmaven.test.failure.ignore=ture clean package'
       }
+    }
       
     // Docker Image 생성
     stage('Docker Image Build') {
@@ -63,7 +64,7 @@ pipeline {
           """
         }
       }
-
       
+    
   }
 }
