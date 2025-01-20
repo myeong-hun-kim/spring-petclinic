@@ -22,6 +22,7 @@ pipeline {
           branch: 'main'
       }
     }
+  }
     
     // Maven 빌드 작업
     stage('Maven Build') {
@@ -41,6 +42,7 @@ pipeline {
           """
         }
       }
+    }
       
     // DockerHub Login
       stage('Docker Login') {
