@@ -19,7 +19,7 @@ pipeline {
       steps {
         echo 'Git Clone'
         git url: 'https://github.com/myeong-hun-kim/spring-petclinic.git',
-          branch: 'main', credentailIdL: 'GIT_GREDENTAILS'
+          branch: 'main', credentailsId: 'GIT_GREDENTAILS'
       }
     }
   }
